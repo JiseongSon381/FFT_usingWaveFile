@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define WaveFileName "440HZ_5second.wav"
+#define WaveFileName "440Hz.wav"
 
 typedef struct {
     unsigned short NumChannels;
@@ -22,5 +22,6 @@ typedef struct {
 
     getWAVEinfo returns the number of bytes per sample
 */
+
 unsigned int getWAVEinfo(WAVEinfo *w);
 void getSoundData(short SoundBuf[], int NumSample);

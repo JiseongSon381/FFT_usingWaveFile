@@ -51,10 +51,7 @@ int main(){
 
     printf("Copy Complete\n");
 
-
-
-    
-
+// make FFT_Result.csv file
 #ifdef DEBUG
     FILE *FFT_CSV_dest = fopen("FFT_Result.csv", "w+");
 
@@ -63,6 +60,7 @@ int main(){
 
     fclose(FFT_CSV_dest);
 #endif
+
     free(SoundBuffer);
     return 0;
 }

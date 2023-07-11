@@ -1,11 +1,14 @@
-#include <stdio.h>
 #include "WAVE.h"
+#include "FFT.h"
 
-int main()
-{
+int main(){
+#ifdef TEST_WAVE
     WAVEinfo w;
+// get file informations
     int NumSample = getWAVEinfo(&w);
 
+// Checking Information
+    printf("== File Informations =================\n");
     printf("NumChannels: %d\n", w.NumChannels);
     printf("SampleRate: %d\n", w.SampleRate);
     printf("ByteRate: %d\n", w.ByteRate);
@@ -13,29 +16,36 @@ int main()
     printf("BitPerSample: %d\n", w.BitPerSample);
     printf("SoundDataSize: %d\n\n", w.SoundDataSize);
     printf("NumSample: %d\n\n", NumSample);
+    printf("======================================\n");
 
+// get sound wave data
     short *SoundBuffer = (short *)malloc(sizeof(short) * NumSample);
-    // unsigned *L_DATA = (unsigned *)malloc(sizeof(unsigned) * NumSample);
-    // unsigned *R_DATA = (unsigned *)malloc(sizeof(unsigned) * NumSample);
-
     getSoundData(SoundBuffer, NumSample);
 
-    // for(int i = 0; i < NumSample; i++){
-    //     L_DATA[i] = SoundBuffer[i] % 16;
-    //     R_DATA[i] = SoundBuffer[i] / 16;
-    // }
+// make SoundData.csv file
+    FILE *SoundData_CSV_DEST = fopen("SoundData.csv", "w+");
 
-    FILE *fp = fopen("test.csv", "w+");
+    for(int i = 0; i < NumSample; i++)
+        fprintf(SoundData_CSV_DEST, "%d\n", SoundBuffer[i]);
 
-    for(int i = 0; i < NumSample; i++){
-        fprintf(fp, "%d\n", SoundBuffer[i]);
-    }
+    fclose(SoundData_CSV_DEST);
 
     free(SoundBuffer);
-    // free(L_DATA);
-    // free(R_DATA);
+#endif
 
-    fclose(fp);
+#ifdef TEST_FFT
+    double XR[SampleResol];
+    double XI[SampleResol];
+
+    int n = FFT(SampleResol, XR, XI);
+
+    FILE *FFT_CSV_DEST = fopen("FFT_RESULT.csv");
+    
+    for(int i = 0; i < SampleResol; i++)
+        fprintf(FFT_CSV_DEST, "%d\n", SoundBuffer[i]);
+
+    fclose(FFT_CSV_DEST);
+#endif
 
     return 0;
 }

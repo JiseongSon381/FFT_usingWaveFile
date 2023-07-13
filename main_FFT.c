@@ -4,9 +4,9 @@
 #define TXT_FILE "sample.csv"
 
 int main(){
-    // WAVEinfo w;
+    WAVEinfo w;
 // get file informations
-    // int NumSample = getWAVEinfo(&w);
+    int NumSample = getWAVEinfo(&w);
 
 // #ifdef DATA_TXT
     FILE *INPUT_TXT = fopen(TXT_FILE, "r");
@@ -21,7 +21,7 @@ int main(){
     printf("COMPLETE: TXT file\n");
 // #endif
 
-// Checking Information
+// Checking Informations
 #ifdef DEBUG
     printf("== File Informations =================\n");
     printf("NumChannels: %d\n", w.NumChannels);
@@ -35,8 +35,8 @@ int main(){
 #endif
 
 // get sound wave data
-    // short *SoundBuffer = (short *)malloc(sizeof(short) * NumSample);
-    // getSoundData(SoundBuffer, NumSample);
+    short *SoundBuffer = (short *)malloc(sizeof(short) * NumSample);
+    getSoundData(SoundBuffer, NumSample);
 
 // get transformed array
     static double XR[SampleResol];

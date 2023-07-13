@@ -50,14 +50,14 @@ int main(){
         }
 
 // make SoundData.csv file
-// #ifdef DEBUG
-    FILE *SoundData_CSV_dest = fopen("SoundData.csv", "w+");
+#ifdef DEBUG
+    FILE *SoundData_CSV_dest = fopen("RawSoundData.csv", "w+");
 
     for(int i = 0; i < SampleResol; i++)
         fprintf(SoundData_CSV_dest, "%d\n", SoundBuffer[i]);
 
     fclose(SoundData_CSV_dest);
-// #endif
+#endif
 
 
     printf("Generate Function Complete\n\n");
@@ -75,14 +75,14 @@ int main(){
     }
 
 // make FFT_Result.csv file
-// #ifdef DEBUG
+#ifdef DEBUG
     FILE *FFT_CSV_dest = fopen("FFT_Result.csv", "w+");
 
     for(int i = 0; i < SampleResol; i++)
         fprintf(FFT_CSV_dest, "%f, %f\n", 44100 * ((double)i/(double)SampleResol), Result[i]);
 
     fclose(FFT_CSV_dest);
-// #endif
+#endif
 
     fclose(INPUT_TXT);
 

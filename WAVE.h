@@ -25,3 +25,4 @@ typedef struct {
 
 unsigned int getWAVEinfo(WAVEinfo *w);
 void getSoundData(short SoundBuf[], int NumSample);
+void writeWAVE(short SoundBuf[], int NumSample, short Offset);

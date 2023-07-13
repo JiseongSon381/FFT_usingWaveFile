@@ -36,3 +36,7 @@ void getSoundData(short SoundBuf[], int NumSample){
         printf("Error: Not match Number of Samples\n");
     }
 }
+
+void writeWAVE(short SoundBuf[], int NumSample, short Offset){
+    
+}

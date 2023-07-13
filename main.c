@@ -1,8 +1,6 @@
 #include "FFT.h"
 #include "WAVE.h"
 
-#define DEBUG
-
 int main(){
     WAVEinfo w;
 // get file informations
@@ -36,17 +34,19 @@ int main(){
 #endif
 
 // get transformed array
-    double XR[1024];
-    double XI[1024];
+    double XR[SampleResol];
+    double XI[SampleResol];
 
-    double Result[1024][NumSample];
+    double *Result = (double *)malloc(sizeof(double) * 4096);
+    
 
-    int count = 0;
-    for(int i = 0; i < NumSample; ){
-        for(int j = 0; j < 1024; j++)
+    // int count = 0;
+    for(int i = 1; i <= 4096; i+=1024){
+        for(int j = 0; j < SampleResol; j++)
             XR[j] = (double) SoundBuffer[j];
-            int n = FFT(1024, XR, XI);
-            
+        
+        int n = FFT(SampleResol, XR, XI);
+        n = FFT_magnitude(SampleResol, XR, XI, Result + (i - 1));
     }
 
     printf("Copy Complete\n");
@@ -55,12 +55,13 @@ int main(){
 #ifdef DEBUG
     FILE *FFT_CSV_dest = fopen("FFT_Result.csv", "w+");
 
-    for(int i = 0; i < NumSample; i++)
-        fprintf(FFT_CSV_dest, "%f\n", XR[i]);
+    for(int i = 0; i < 4096; i++)
+        fprintf(FFT_CSV_dest, "%f\n", Result[i]);
 
     fclose(FFT_CSV_dest);
 #endif
 
     free(SoundBuffer);
+    free(Result);
     return 0;
 }

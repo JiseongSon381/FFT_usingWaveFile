@@ -53,3 +53,13 @@ int FFT(long N, double XR[], double XI[]){
     } 
     return 0;
 }
+
+int FFT_magnitude(long N, double XR[], double XI[], double Magnitude[]){
+    for(int i = 0; i < N; i++){
+        double XR_2 = pow(XR[i], 2);
+        double XI_2 = pow(XI[i], 2);
+        Magnitude[i] = XR_2 + (double)abs(XI_2);
+    }
+
+    return 0;
+}

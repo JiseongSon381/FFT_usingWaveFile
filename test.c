@@ -40,24 +40,24 @@ int main(){
 // Checking Informaions
     printf("== File Informations =================\n");
     printf("SampleRate: %d\n", w.SampleRate);
-    printf("FFT Size: %d\n", SampleResol);
+    printf("FFT Size: %d\n", FFT_SIZE);
     printf("======================================\n");
 
     int n = 0;
-    static double Data_Real[SampleResol];
-    static double Data_Imaginary[SampleResol];
-    static double Data_Result[SampleResol];
+    static double Data_Real[FFT_SIZE];
+    static double Data_Imaginary[FFT_SIZE];
+    static double Data_Result[FFT_SIZE];
     
-    n = FFT(SampleResol, Data_Real, Data_Imaginary);
+    n = FFT(FFT_SIZE, Data_Real, Data_Imaginary);
 
     if(n == -1)
         printf("ERROR: Failed to compute FFT. FFT Size should be 2^n");
     else
-        n = FFT_magnitude(SampleResol, Data_Real, Data_Imaginary, Data_Result);
+        n = FFT_magnitude(FFT_SIZE, Data_Real, Data_Imaginary, Data_Result);
 
     FILE *FFT_CSV_DEST = fopen("./data_csv/test_FFT_RESULT.csv");
     
-    for(int i = 0; i < SampleResol; i++)
+    for(int i = 0; i < FFT_SIZE; i++)
         fprintf(FFT_CSV_DEST, "%f\n", Data_Result[i]);
 
     fclose(FFT_CSV_DEST);

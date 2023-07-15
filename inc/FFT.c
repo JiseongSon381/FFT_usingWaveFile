@@ -1,6 +1,6 @@
 #include "FFT.h"
 
-int FFT(long N, double XR[], double XI[]){
+int FFT(long N, double XR[], double XI[], double WINDOW[]){
 // 1. check 2^n count -> if else then return -1
     if ((N !=0) && ((N & (N-1)) != 0) ) return -1;
 
